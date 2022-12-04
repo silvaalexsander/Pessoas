@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Pessoas.Models.Pessoa>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>Pessoas cadastradas</h1>
+    <p>
+        <a asp-controller="Pessoa" asp-action="Cadastrar">Novo Cadastro</a>
+    </p>
+
+    @if (@TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+
+            @TempData["Mensagem"]
+        </div>
+    }
+
+    <table class="table" border="1">
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label>@item.idPessoa</label>
+                </td>
+                <td>
+                    <label>@item.name</label>
+                </td>
+                <td>
+                    <label>@item.address</label>
+                </td>
+                <td>
+
+                    <a asp-controller="Pessoa"
+                   asp-action="Editar"
+                   asp-route-id="@item.idPessoa">Editar</a>
+
+                    <a asp-controller="Pessoa"
+                   asp-action="Consultar"
+                   asp-route-id="@item.idPessoa">Consultar</a>
+
+                    <a asp-controller="Pessoa"
+                   asp-action="Excluir"
+                   asp-route-id="@item.idPessoa">Excluir</a>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
